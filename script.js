@@ -5,17 +5,17 @@ async function loadProducts() {
   try {
     const response = await fetch('http://localhost:3001/products');
     if (!response.ok) {
-      throw new Error(`Ошибка сети: ${response.status}`);
+      throw new Error(`Ошибка сервера: ${response.status}`);
     }
     const products = await response.json();
     renderProducts(products);
   } catch (error) {
-    console.error('Ошибка при загрузке каталога:', error);
+    console.error('Ошибка загрузки данных:', error);
     const catalog = document.querySelector('.catalog');
-    const errorMsg = document.createElement('p');
-    errorMsg.className = 'error-state';
-    errorMsg.textContent = 'Не удалось загрузить каталог товаров. Убедитесь, что сервер запущен.';
-    catalog.appendChild(errorMsg);
+    const errorMessage = document.createElement('p');
+    errorMessage.className = 'error-message';
+    errorMessage.textContent = 'Ошибка: не удалось загрузить товары. Убедитесь, что json-server запущен на порту 3001.';
+    catalog.appendChild(errorMessage);
   }
 }
 

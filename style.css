@@ -158,7 +158,8 @@ main {
   background-color: #166534;
 }
 
-.error-state {
+.error-state,
+.error-message {
   grid-column: 1 / -1;
   padding: 24px;
   background-color: #fef2f2;
