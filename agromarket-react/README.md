@@ -2,15 +2,21 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-Currently, two official plugins are available:
+## Лабораторная 4 — вёрстка
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Box model карточки (часть 1)
+- content: содержимое карточки (картинка, название, цена, кнопка); padding: 16px; border: 1px (#dfe6dc); margin: 0 (расстояния регулируются через gap).
+- с box-sizing: border-box ширина стала включать padding (16px) и border (1px) внутрь блока, благодаря чему размеры карточки предсказуемы и она не распирает ячейку сетки.
 
-## React Compiler
+### repeat(4, 1fr) на узком экране (часть 4)
+При сужении окна (например, до ~500px) фиксированная сетка `repeat(4, 1fr)` принудительно делит пространство на 4 узкие колонки. Карточки сильно сжимаются (становятся меньше 100px), названия товаров переносятся по слогам, кнопки вылезают за границы, и верстка ломается из-за отсутствия адаптивности.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### auto-fit vs auto-fill (часть 4)
+При фильтрации (1–2 товара) `auto-fit` растягивает оставшиеся карточки на всю ширину ряда (схлопывая пустые колонки), а `auto-fill` сохраняет невидимые пустые колонки и оставляет карточки стандартного аккуратного размера.
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### Адаптивность (часть 5)
+| Ширина | Колонок | Где «Доставка» | Шапка |
+|--------|---------|----------------|-------|
+| 375    | 1       | Под каталогом  | Столбик |
+| 768    | 2–3     | Под каталогом  | Ряд   |
+| 1280   | 3–4     | Справа от каталога | Ряд |

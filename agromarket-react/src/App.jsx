@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ContactForm from './components/ContactForm';
 import ProductCard from './components/ProductCard';
 
 function App() {
@@ -38,23 +41,14 @@ function App() {
 
   return (
     <>
-      <header>
-        <div className="header-container">
-          <h1>AgroMarket</h1>
-          <div className="cart-widget">
-            <span className="cart-icon" aria-hidden="true">🛒</span>
-            <span className="cart-label">Корзина:</span>
-            <span id="cart-count">{cartCount}</span>
-          </div>
-        </div>
-      </header>
+      <Header cartCount={cartCount} />
 
-      <main>
-        <section className="catalog-section">
-          <div className="catalog-header">
+      <main className="page">
+        <section id="catalog" className="catalog">
+          <div className="catalog-toolbar">
             <h2>Каталог</h2>
             <input
-              type="text"
+              type="search"
               className="search-input"
               placeholder="Поиск товара..."
               value={searchTerm}
@@ -75,18 +69,32 @@ function App() {
           )}
 
           {!loading && !error && filteredProducts.length > 0 && (
-            <div className="catalog">
+            <div className="product-grid">
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
                   onAdd={handleAddToCart}
+                  featured={Number(product.id) === 1}
                 />
               ))}
             </div>
           )}
         </section>
+
+        <aside id="delivery" className="sidebar">
+          <h3>Доставка</h3>
+          <ul>
+            <li>Астана — на следующий день</li>
+            <li>Акмолинская область — 2-3 дня</li>
+            <li>Бесплатно от 20 000 тг</li>
+          </ul>
+        </aside>
+
+        <ContactForm />
       </main>
+
+      <Footer />
     </>
   );
 }

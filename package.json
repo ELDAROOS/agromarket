@@ -1,0 +1,10 @@
+{
+  "name": "agromarket",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix agromarket-react run dev",
+    "build": "npm --prefix agromarket-react run build",
+    "server": "npx json-server --watch db.json --port 3001"
+  }
+}
